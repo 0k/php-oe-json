@@ -1,0 +1,20 @@
+{
+    "name": "php-oe-json/php-oe-json",
+    "type": "library",
+    "description": "OpenERP Json query",
+    "keywords": ["OpenERP"],
+    "homepage": "https://github.com/0k/php-oe-json",
+    "license": "???",
+    "authors": [
+        {
+            "name": "Valentin Lab",
+            "email": "valentin.lab@kalysto.org",
+            "homepage": "http://vaab.blog.kal.fr/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "tivoka/tivoka": "3.2.*"
+    }
+}
