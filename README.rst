@@ -2,6 +2,22 @@
 php-oe-json
 ===========
 
+.. image:: https://poser.pugx.org/0k/php-oe-json/v/stable.png
+    :target: https://packagist.org/packages/0k/php-oe-json
+    :alt: Latest Stable Version
+
+.. image:: https://poser.pugx.org/0k/php-oe-json/downloads.png
+    :target: https://packagist.org/packages/0k/php-oe-json
+    :alt: Total Downloads
+
+.. image:: https://poser.pugx.org/0k/php-oe-json/v/unstable.png
+    :target: https://packagist.org/packages/0k/php-oe-json
+    :alt: Latest Unstable Version
+
+.. image:: https://poser.pugx.org/0k/php-oe-json/license.png
+    :target: https://packagist.org/packages/0k/php-oe-json
+    :alt: License
+
 Modest PHP class to manage OpenERP Json query.
 
 
