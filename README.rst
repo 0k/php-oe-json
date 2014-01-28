@@ -65,11 +65,11 @@ sample PHP code::
   ?>
 
 This actual code (with small modifications) is provided in the ``example-project``
-directory. This is a ``composer`` package (more about composer_, how to `get
-composer command`_), so you can run ``composer install`` on this directory
-to install dependencies, and you must only opne the ``settings.php`` to change
-the ``$url``, ``$db`` and the ``$login``, ``$password`` to test it with your 
-installation.
+directory which is a ``composer``-ready package (more about composer_, how to `get
+composer command`_). This means you can run ``composer install`` on the root of the 
+``example-project`` directory to install dependencies, and you'll only have to edit
+``settings.php`` and set ``$url``, ``$db`` and the ``$login``, ``$password`` to test
+it with your installation.
 
 .. _composer: https://getcomposer.org/
 .. _get composer command: https://getcomposer.org/doc/00-intro.md#downloading-the-composer-executable
