@@ -8,7 +8,7 @@ Modest PHP class to manage OpenERP Json query.
 Code maturity
 -------------
 
-Early working alpha. Comments welcome.
+Early working alpha. Comments welcome. Although it was tested against OpenERP version 6.1 and 7.0.
 
 
 Features
@@ -30,16 +30,11 @@ sample PHP code::
 
   require_once 'openerp.php';
 
-  
-  // Instanciate with $url, and $dbname
-  $oe = new OpenERP("http://localhost:8069", "test_json");
-
-  // login with $url and $dbname
+  $oe = new PhpOeJson\OpenERP("http://localhost:8069", "test_json");
   $oe->login("admin", "xxxxxx");
 
   echo "Logged in (session id: " . $oe->session_id . ")";
 
-  // Query with direct object method which are mapped to json-rpc calls
   $partners = $oe->read(array(
     'model' => 'res.partner',
     'fields' => array('name', 'city'),
@@ -52,6 +47,16 @@ sample PHP code::
   echo "</ul>";
 
   ?>
+
+This actual code (with small modifications) is provided in the ``example-project``
+directory. This is a ``composer`` package (more about composer_, how to `get
+composer command`_), so you can run ``composer install`` on this directory
+to install dependencies, and you must only opne the ``settings.php`` to change
+the ``$url``, ``$db`` and the ``$login``, ``$password`` to test it with your 
+installation.
+
+.. _composer: https://getcomposer.org/
+.. _get composer command: https://getcomposer.org/doc/00-intro.md#downloading-the-composer-executable
 
 
 Please note that this is a very thin layer above Tivoka_ which is a JSON-RPC PHP lib.

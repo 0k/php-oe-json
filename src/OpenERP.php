@@ -1,6 +1,11 @@
 <?php
 
-require_once 'tivoka/include.php';
+namespace PhpOeJson;
+
+require 'vendor/autoload.php';
+
+use Exception;
+use Tivoka;
 
 
 class OpenErpException extends Exception {};

@@ -1,0 +1,11 @@
+{
+    "require": {
+        "0k/php-oe-json": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:0k/php-oe-json.git"
+        }
+    ]
+}
