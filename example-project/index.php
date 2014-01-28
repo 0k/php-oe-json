@@ -3,10 +3,7 @@
 require 'vendor/autoload.php';
 include 'settings.php';
 
-// Instanciate with $url, and $dbname
 $oe = new PhpOeJson\OpenERP($url, $db);
-
-// login with $url and $dbname
 $oe->login($login, $password);
 
 echo "Logged in (session id: " . $oe->session_id . ")";
