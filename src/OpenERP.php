@@ -22,9 +22,10 @@ class OpenERP {
                     'get_session_info' => "/web/session/get_session_info",
                     'destroy' => "/web/session/destroy");
 
-  function __construct($url, $db) {
+  function __construct($url, $db, $legacy = false) {
     $this->base = $url;
     $this->db = $db;
+    $this->legacy = $legacy;
 
     $this->cookie = False;
   }
@@ -34,13 +35,17 @@ class OpenERP {
    */
   public function login($login, $password) {
     $this->cookie = False; // will ask for a new cookie.
-    $req = $this->authenticate(array(
-        'base_location' => $this->base,
-        'db' => $this->db,
-        'login' => $login,
-        'password' => $password,
-        'session_id' => "",
-      ));
+    $data = array(
+      'base_location' => $this->base,
+      'db' => $this->db,
+      'login' => $login,
+      'password' => $password
+    );
+    
+    if ($this->legacy == true)
+      $data["session_id"] = "";
+    
+    $req = $this->authenticate($data);
     $this->session_id = $req['session_id'];
     $this->authenticated = $req["uid"] !== False;
     $this->uid = $req["uid"];
@@ -101,7 +106,7 @@ class OpenERP {
       $params = array();
     else
       $params = $params[0];
-    if (!array_key_exists("session_id", $params) && isset($this->session_id))
+    if ($this->legacy == true && !array_key_exists("session_id", $params) && isset($this->session_id))
         $params["session_id"] = $this->session_id;
     return $this->json($this->base  . $url, $params);
   }
