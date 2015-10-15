@@ -47,7 +47,7 @@ sample PHP code::
 
   require_once 'openerp.php';
 
-  $oe = new PhpOeJson\OpenERP("http://localhost:8069", "test_json", false /*set this to true for Odoo 7.0-*/);
+  $oe = new PhpOeJson\OpenERP("http://localhost:8069", "test_json");
   $oe->login("admin", "xxxxxx");
 
   echo "Logged in (session id: " . $oe->session_id . ")";
