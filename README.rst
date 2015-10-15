@@ -24,7 +24,7 @@ Modest PHP class to manage OpenERP Json query.
 Code maturity
 -------------
 
-Early working alpha. Comments welcome. Although it was tested against OpenERP version 6.1 and 7.0.
+Early working alpha. Comments welcome. Although it was tested against OpenERP version 6.1, 7.0 and 8.0.
 
 
 Features
@@ -35,6 +35,7 @@ Features
 - Ability to resume an open session (and thus login in openerp) with a
   saved ``session_id`` and HTTP ``cookie_id`` (without ``$login`` and
   ``$password``)
+- Backwards compatiblity for Odoo 7.0 and prior with the legacy mode
 
 
 Usage
@@ -46,7 +47,7 @@ sample PHP code::
 
   require_once 'openerp.php';
 
-  $oe = new PhpOeJson\OpenERP("http://localhost:8069", "test_json");
+  $oe = new PhpOeJson\OpenERP("http://localhost:8069", "test_json", false /*set this to true for Odoo 7.0-*/);
   $oe->login("admin", "xxxxxx");
 
   echo "Logged in (session id: " . $oe->session_id . ")";
