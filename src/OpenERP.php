@@ -58,8 +58,6 @@ class OpenERP {
       $this->legacy = false;
     }
     
-    var_dump($this->legacy);
-
     return $this->authenticated;
   }
 
