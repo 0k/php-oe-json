@@ -20,7 +20,8 @@ class OpenERP {
   var $urls = array('read' => "/web/dataset/search_read",
                     'authenticate' => "/web/session/authenticate",
                     'get_session_info' => "/web/session/get_session_info",
-                    'destroy' => "/web/session/destroy");
+                    'destroy' => "/web/session/destroy",
+                    'get_version_info' => "/web/webclient/version_info");
 
   function __construct($url, $db) {
     $this->base = $url;
@@ -34,17 +35,29 @@ class OpenERP {
    */
   public function login($login, $password) {
     $this->cookie = False; // will ask for a new cookie.
-    $req = $this->authenticate(array(
-        'base_location' => $this->base,
-        'db' => $this->db,
-        'login' => $login,
-        'password' => $password,
-        'session_id' => "",
-      ));
+    $data = array(
+      'base_location' => $this->base,
+      'db' => $this->db,
+      'login' => $login,
+      'password' => $password
+    );
+    
+    $req = $this->authenticate($data);
     $this->session_id = $req['session_id'];
     $this->authenticated = $req["uid"] !== False;
     $this->uid = $req["uid"];
-
+    
+    //Get Odoo version
+    $req = $this->get_version_info();
+    if (floatval($req["server_serie"]) <= 7.0)
+    {
+      $this->legacy = true;
+    }
+    else
+    {
+      $this->legacy = false;
+    }
+    
     return $this->authenticated;
   }
 
@@ -101,7 +114,7 @@ class OpenERP {
       $params = array();
     else
       $params = $params[0];
-    if (!array_key_exists("session_id", $params) && isset($this->session_id))
+    if ($this->legacy == true && !array_key_exists("session_id", $params) && isset($this->session_id))
         $params["session_id"] = $this->session_id;
     return $this->json($this->base  . $url, $params);
   }
