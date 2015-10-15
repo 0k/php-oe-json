@@ -20,12 +20,12 @@ class OpenERP {
   var $urls = array('read' => "/web/dataset/search_read",
                     'authenticate' => "/web/session/authenticate",
                     'get_session_info' => "/web/session/get_session_info",
-                    'destroy' => "/web/session/destroy");
+                    'destroy' => "/web/session/destroy",
+                    'get_version_info' => "/web/webclient/version_info");
 
-  function __construct($url, $db, $legacy = false) {
+  function __construct($url, $db) {
     $this->base = $url;
     $this->db = $db;
-    $this->legacy = $legacy;
 
     $this->cookie = False;
   }
@@ -42,13 +42,23 @@ class OpenERP {
       'password' => $password
     );
     
-    if ($this->legacy == true)
-      $data["session_id"] = "";
-    
     $req = $this->authenticate($data);
     $this->session_id = $req['session_id'];
     $this->authenticated = $req["uid"] !== False;
     $this->uid = $req["uid"];
+    
+    //Get Odoo version
+    $req = $this->get_version_info();
+    if (floatval($req["server_serie"]) <= 7.0)
+    {
+      $this->legacy = true;
+    }
+    else
+    {
+      $this->legacy = false;
+    }
+    
+    var_dump($this->legacy);
 
     return $this->authenticated;
   }
